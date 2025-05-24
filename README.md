@@ -123,6 +123,7 @@ Headers:
 Content-Type: application/json
 
 ### Body (JSON):
+```javascript
 {
   "name": "Bruce QA",
   "email": "bruce.qa@example.com",
@@ -131,9 +132,7 @@ Content-Type: application/json
 
 ### Tests Tab:
 
-javascript
-Copy
-Edit
+```javascript
 pm.test("Status code is 201", function () {
     pm.response.to.have.status(201);
 });
@@ -157,18 +156,16 @@ Content-Type: application/json
 
 ### Body (JSON):
 
-json
-Copy
-Edit
+```javascript
 {
   "email": "bruce.qa@example.com",
   "password": "SecureP@ss123"
-}
-### Tests Tab:
+};
 
-javascript
-Copy
-Edit
+---
+
+### Tests Tab:
+```javascript
 pm.test("Login status is 200", function () {
     pm.response.to.have.status(200);
 });
@@ -192,9 +189,7 @@ Authorization: Bearer {{authToken}}
 
 ### Tests Tab:
 
-javascript
-Copy
-Edit
+```javascript
 pm.test("Profile status is 200", function () {
     pm.response.to.have.status(200);
 });
