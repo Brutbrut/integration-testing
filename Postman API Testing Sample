@@ -1,4 +1,4 @@
-#📝 Step 1: Register a New User
+# 📝 Step 1: Register a New User
 Request Type: POST
 
 Endpoint: https://api.example.com/register
@@ -28,6 +28,8 @@ pm.test("Response contains user ID", function () {
     pm.expect(jsonData).to.have.property("userId");
     pm.environment.set("userId", jsonData.userId);
 });
+
+---
 
 # 📝 Step 2: Login User
 Request Type: POST
@@ -61,6 +63,9 @@ pm.test("Token is returned", function () {
     pm.expect(jsonData).to.have.property("token");
     pm.environment.set("authToken", jsonData.token);
 });
+
+---
+
 # 📝 Step 3: Get User Profile
 Request Type: GET
 
@@ -84,6 +89,9 @@ pm.test("Profile contains correct user data", function () {
     pm.expect(jsonData.email).to.eql("bruce.qa@example.com");
     pm.expect(jsonData.name).to.eql("Bruce QA");
 });
+
+---
+
 #📦 Environment Variables Used
 Variable	Description
 authToken	JWT token saved from login
