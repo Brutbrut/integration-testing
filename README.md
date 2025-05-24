@@ -112,3 +112,149 @@ Gradually integrate and test modules one at a time.
 - Ensure order confirmation triggers email notification.
 
 ---
+# Postman API Sample (Register/Login/Profile)
+## 📝 Step 1: Register a New User
+Request Type: POST
+
+Endpoint: https://api.example.com/register
+
+Headers:
+
+Content-Type: application/json
+
+### Body (JSON):
+{
+  "name": "Bruce QA",
+  "email": "bruce.qa@example.com",
+  "password": "SecureP@ss123"
+}
+
+### Tests Tab:
+
+javascript
+Copy
+Edit
+pm.test("Status code is 201", function () {
+    pm.response.to.have.status(201);
+});
+
+pm.test("Response contains user ID", function () {
+    const jsonData = pm.response.json();
+    pm.expect(jsonData).to.have.property("userId");
+    pm.environment.set("userId", jsonData.userId);
+});
+
+---
+
+## 📝 Step 2: Login User
+Request Type: POST
+
+Endpoint: https://api.example.com/login
+
+Headers:
+
+Content-Type: application/json
+
+### Body (JSON):
+
+json
+Copy
+Edit
+{
+  "email": "bruce.qa@example.com",
+  "password": "SecureP@ss123"
+}
+### Tests Tab:
+
+javascript
+Copy
+Edit
+pm.test("Login status is 200", function () {
+    pm.response.to.have.status(200);
+});
+
+pm.test("Token is returned", function () {
+    const jsonData = pm.response.json();
+    pm.expect(jsonData).to.have.property("token");
+    pm.environment.set("authToken", jsonData.token);
+});
+
+---
+
+## 📝 Step 3: Get User Profile
+Request Type: GET
+
+Endpoint: https://api.example.com/profile
+
+Headers:
+
+Authorization: Bearer {{authToken}}
+
+### Tests Tab:
+
+javascript
+Copy
+Edit
+pm.test("Profile status is 200", function () {
+    pm.response.to.have.status(200);
+});
+
+pm.test("Profile contains correct user data", function () {
+    const jsonData = pm.response.json();
+    pm.expect(jsonData.email).to.eql("bruce.qa@example.com");
+    pm.expect(jsonData.name).to.eql("Bruce QA");
+});
+
+---
+
+## 📦 Environment Variables Used
+Variable	Description
+authToken	JWT token saved from login
+userId	User ID from registration step
+
+📁 How to Organize in Postman
+Create a collection named User Flow - Integration Test and add three requests:
+
+Register User
+
+Login User
+
+Get Profile
+
+Use a Postman environment with authToken and userId as variables for seamless integration between requests.
+
+---
+
+# 🧪 Postman API Test Command Reference
+
+| **Category**            | **Purpose**                             | **Command** |
+|-------------------------|-----------------------------------------|-------------|
+| ✅ **Status Check**     | Validate HTTP 200 OK                    | `pm.response.to.have.status(200);` |
+|                         | Validate 401 Unauthorized               | `pm.response.to.have.status(401);` |
+|                         | Validate response time < 500ms          | `pm.expect(pm.response.responseTime).to.be.below(500);` |
+| 📦 **Body Validation**  | Parse JSON response                     | `let jsonData = pm.response.json();` |
+|                         | Check value of a field                  | `pm.expect(jsonData.email).to.eql("test@example.com");` |
+|                         | Check field exists                      | `pm.expect(jsonData).to.have.property("userId");` |
+| 🔁 **Looping**          | Check each item in array has "email"    | `jsonData.forEach(u => pm.expect(u).to.have.property("email"));` |
+| 📌 **Environment Vars** | Set environment variable                | `pm.environment.set("token", jsonData.token);` |
+|                         | Unset environment variable              | `pm.environment.unset("token");` |
+| 🌍 **Global Vars**      | Set global variable                     | `pm.globals.set("sessionId", "12345");` |
+|                         | Unset global variable                   | `pm.globals.unset("sessionId");` |
+| 🔍 **Headers**          | Validate `Content-Type` is JSON         | `pm.response.to.have.header("Content-Type", "application/json");` |
+|                         | Get a header value                      | `pm.response.headers.get("Authorization");` |
+| 🧹 **Utilities**        | Print to console                        | `console.log("Token:", pm.environment.get("token"));` |
+|                         | Delay execution (pre-request only)      | `setTimeout(() => {}, 2000);` |
+
+---
+
+### 💡 Example Use in Tests Tab
+
+```javascript
+pm.test("Status is 200", function () {
+    pm.response.to.have.status(200);
+});
+
+pm.test("Email is correct", function () {
+    const jsonData = pm.response.json();
+    pm.expect(jsonData.email).to.eql("test@example.com");
+});
