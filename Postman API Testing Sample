@@ -1,0 +1,101 @@
+📝 Step 1: Register a New User
+Request Type: POST
+
+Endpoint: https://api.example.com/register
+
+Headers:
+
+Content-Type: application/json
+
+Body (JSON):
+{
+  "name": "Bruce QA",
+  "email": "bruce.qa@example.com",
+  "password": "SecureP@ss123"
+}
+
+Tests Tab:
+
+javascript
+Copy
+Edit
+pm.test("Status code is 201", function () {
+    pm.response.to.have.status(201);
+});
+
+pm.test("Response contains user ID", function () {
+    const jsonData = pm.response.json();
+    pm.expect(jsonData).to.have.property("userId");
+    pm.environment.set("userId", jsonData.userId);
+});
+
+📝 Step 2: Login User
+Request Type: POST
+
+Endpoint: https://api.example.com/login
+
+Headers:
+
+Content-Type: application/json
+
+Body (JSON):
+
+json
+Copy
+Edit
+{
+  "email": "bruce.qa@example.com",
+  "password": "SecureP@ss123"
+}
+Tests Tab:
+
+javascript
+Copy
+Edit
+pm.test("Login status is 200", function () {
+    pm.response.to.have.status(200);
+});
+
+pm.test("Token is returned", function () {
+    const jsonData = pm.response.json();
+    pm.expect(jsonData).to.have.property("token");
+    pm.environment.set("authToken", jsonData.token);
+});
+📝 Step 3: Get User Profile
+Request Type: GET
+
+Endpoint: https://api.example.com/profile
+
+Headers:
+
+Authorization: Bearer {{authToken}}
+
+Tests Tab:
+
+javascript
+Copy
+Edit
+pm.test("Profile status is 200", function () {
+    pm.response.to.have.status(200);
+});
+
+pm.test("Profile contains correct user data", function () {
+    const jsonData = pm.response.json();
+    pm.expect(jsonData.email).to.eql("bruce.qa@example.com");
+    pm.expect(jsonData.name).to.eql("Bruce QA");
+});
+📦 Environment Variables Used
+Variable	Description
+authToken	JWT token saved from login
+userId	User ID from registration step
+
+📁 How to Organize in Postman
+Create a collection named User Flow - Integration Test and add three requests:
+
+Register User
+
+Login User
+
+Get Profile
+
+Use a Postman environment with authToken and userId as variables for seamless integration between requests.
