@@ -1,4 +1,4 @@
-📝 Step 1: Register a New User
+@@📝 Step 1: Register a New User
 Request Type: POST
 
 Endpoint: https://api.example.com/register
@@ -7,14 +7,14 @@ Headers:
 
 Content-Type: application/json
 
-Body (JSON):
+@Body (JSON):
 {
   "name": "Bruce QA",
   "email": "bruce.qa@example.com",
   "password": "SecureP@ss123"
 }
 
-Tests Tab:
+#Tests Tab:
 
 javascript
 Copy
@@ -29,7 +29,7 @@ pm.test("Response contains user ID", function () {
     pm.environment.set("userId", jsonData.userId);
 });
 
-📝 Step 2: Login User
+### 📝 Step 2: Login User
 Request Type: POST
 
 Endpoint: https://api.example.com/login
@@ -38,7 +38,7 @@ Headers:
 
 Content-Type: application/json
 
-Body (JSON):
+# Body (JSON):
 
 json
 Copy
@@ -47,7 +47,7 @@ Edit
   "email": "bruce.qa@example.com",
   "password": "SecureP@ss123"
 }
-Tests Tab:
+# Tests Tab:
 
 javascript
 Copy
@@ -61,7 +61,7 @@ pm.test("Token is returned", function () {
     pm.expect(jsonData).to.have.property("token");
     pm.environment.set("authToken", jsonData.token);
 });
-📝 Step 3: Get User Profile
+### 📝 Step 3: Get User Profile
 Request Type: GET
 
 Endpoint: https://api.example.com/profile
@@ -70,7 +70,7 @@ Headers:
 
 Authorization: Bearer {{authToken}}
 
-Tests Tab:
+# Tests Tab:
 
 javascript
 Copy
@@ -84,7 +84,7 @@ pm.test("Profile contains correct user data", function () {
     pm.expect(jsonData.email).to.eql("bruce.qa@example.com");
     pm.expect(jsonData.name).to.eql("Bruce QA");
 });
-📦 Environment Variables Used
+###📦 Environment Variables Used
 Variable	Description
 authToken	JWT token saved from login
 userId	User ID from registration step
