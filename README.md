@@ -1,0 +1,114 @@
+# 🧪 Integration Testing Guide
+
+Integration Testing is a type of software testing where individual units or components are combined and tested as a group. This guide outlines everything you need to know, including approaches, tools, best practices, and examples.
+
+---
+
+## 📌 What is Integration Testing?
+
+Integration Testing focuses on verifying that modules or services within a system interact correctly. While unit testing checks isolated modules, integration testing ensures **data flow and communication** between those modules is accurate and reliable.
+
+---
+
+## 🎯 Objectives
+
+- Verify module interactions and data exchange.
+- Detect interface and communication issues early.
+- Ensure combined units perform as expected.
+- Reduce bugs before system-level testing.
+
+---
+
+## 🏗️ Integration Testing Approaches
+
+### 🔹 Big Bang Integration
+- All modules are combined and tested together.
+- ✅ Simple setup.
+- ❌ Debugging issues is difficult.
+
+### 🔹 Incremental Integration
+Gradually integrate and test modules one at a time.
+
+#### Top-Down
+- Starts from top-level modules.
+- Uses **stubs** for unready lower modules.
+
+#### Bottom-Up
+- Starts from bottom-level modules.
+- Uses **drivers** for unready upper modules.
+
+#### Sandwich (Hybrid)
+- Combines Top-Down and Bottom-Up.
+
+---
+
+## 🔧 Types of Integration Testing
+
+| Type                        | Description                                                                 |
+|-----------------------------|-----------------------------------------------------------------------------|
+| **Functional Integration**  | Checks if combined modules behave correctly.                               |
+| **Thread Testing**          | Tests specific tasks from end to end.                                      |
+| **Backbone Integration**    | Focuses on key system control flow.                                        |
+| **Call Integration**        | Validates function/method calls between modules.                           |
+
+---
+
+## 🛠️ Tools Commonly Used
+
+| Tool         | Purpose                                  |
+|--------------|------------------------------------------|
+| JUnit/TestNG | Java unit/integration testing            |
+| NUnit        | .NET unit/integration testing            |
+| Postman      | API integration testing                  |
+| SoapUI       | Web service testing                      |
+| Selenium     | UI/web module integration testing        |
+| WireMock     | Service virtualization/mocking           |
+| Jenkins      | CI automation for running integration tests |
+
+---
+
+## ✅ Best Practices
+
+- Identify and document all integration points.
+- Use **mocks, stubs, and drivers** to simulate unready modules.
+- Automate integration tests in your CI/CD pipeline.
+- Test **critical workflows** and **data paths**.
+- Isolate and keep tests repeatable and independent.
+- Maintain clean logs and detailed reports.
+
+---
+
+## 🔄 Testing Levels Overview
+
+| Level              | Description                                |
+|--------------------|--------------------------------------------|
+| **Unit Testing**   | Tests individual modules or functions.     |
+| **Integration Testing** | Tests interaction between modules.       |
+| **System Testing** | Tests the whole system functionality.      |
+| **Acceptance Testing** | Validates against business/user requirements. |
+
+---
+
+## 🧠 Common Issues Caught
+
+- Incorrect/missing data passed between modules.
+- Data format or type mismatches.
+- Broken or misconfigured APIs.
+- Latency or timeout errors.
+- Unauthorized access or permission issues.
+
+---
+
+## 💡 Example Scenario: E-Commerce Website
+
+**Modules:**
+- `User Login`
+- `Shopping Cart`
+- `Payment Gateway`
+
+**Integration Test Cases:**
+- Verify user login session is maintained in cart.
+- Validate cart total is passed correctly to payment.
+- Ensure order confirmation triggers email notification.
+
+---
